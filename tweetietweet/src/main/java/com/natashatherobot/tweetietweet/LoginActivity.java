@@ -1,9 +1,11 @@
 package com.natashatherobot.tweetietweet;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
-public class LoginActivity extends ActionBarActivity {
+import com.codepath.oauth.OAuthLoginActivity;
+
+import helpers.TwitterClient;
+
+public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,30 @@ public class LoginActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // OAuth authenticated successfully, launch primary authenticated activity
+    // i.e Display application "homepage"
+    @Override
+    public void onLoginSuccess() {
+        Log.d("DEBUG", "Login SUCCESS!!!!!!");
+//        Intent i = new Intent(this, TimelineActivity.class);
+//        startActivity(i);
+    }
+
+
+    // OAuth authentication flow failed, handle the error
+    // i.e Display an error dialog or toast
+    @Override
+    public void onLoginFailure(Exception e) {
+        e.printStackTrace();
+    }
+
+    // Click handler method for the button used to start OAuth flow
+    // Uses the client to initiate OAuth authorization
+    // This should be tied to a button used to login
+    public void loginToRest(View view) {
+        getClient().connect();
     }
 
 }
