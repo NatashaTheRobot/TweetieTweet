@@ -82,7 +82,6 @@ public class Tweet extends Model implements Serializable {
                 e.printStackTrace();
             }
             tweet.save();
-
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

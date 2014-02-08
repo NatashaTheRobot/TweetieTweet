@@ -16,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.natashatherobot.tweetietweet.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import models.Tweet;
 
@@ -36,14 +38,16 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
 
         Tweet tweet = getItem(position);
 
-        ImageView imageView = (ImageView) view.findViewById(com.natashatherobot.tweetietweet.R.id.ivProfile);
-        ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), imageView);
+        ImageView imageView = (ImageView) view.findViewById(R.id.ivProfile);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+        imageLoader.displayImage(tweet.getUser().getProfileImageUrl(), imageView);
 
-        TextView nameView = (TextView) view.findViewById(com.natashatherobot.tweetietweet.R.id.tvName);
+        TextView nameView = (TextView) view.findViewById(R.id.tvName);
         String formattedName = "<b>" + tweet.getUser().getName() + " <b>" + "<small><font color='#777777'>@" + tweet.getUser().getScreenName() + "</font></small>";
         nameView.setText(Html.fromHtml(formattedName));
 
-        TextView tvTimeStamp = (TextView) view.findViewById(com.natashatherobot.tweetietweet.R.id.tvTimeStamp);
+        TextView tvTimeStamp = (TextView) view.findViewById(R.id.tvTimeStamp);
         String timeString = DateUtils.getRelativeDateTimeString(getContext(),
                 tweet.getCreatedAt().getTime(),
                 DateUtils.SECOND_IN_MILLIS,
@@ -52,7 +56,7 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
         String formattedTime = "<small><font color='#777777'>" + timeString + "</font></small>";
         tvTimeStamp.setText(Html.fromHtml(formattedTime));
 
-        TextView bodyView = (TextView) view.findViewById(com.natashatherobot.tweetietweet.R.id.tvBody);
+        TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
         bodyView.setText(Html.fromHtml(tweet.getBody()));
 
         return view;

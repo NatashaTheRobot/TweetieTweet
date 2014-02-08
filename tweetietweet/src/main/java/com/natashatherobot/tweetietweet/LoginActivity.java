@@ -1,17 +1,8 @@
 package com.natashatherobot.tweetietweet;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.os.Build;
 
 import com.codepath.oauth.OAuthLoginActivity;
@@ -19,8 +10,6 @@ import com.codepath.oauth.OAuthLoginActivity;
 import helpers.TwitterClient;
 
 public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
