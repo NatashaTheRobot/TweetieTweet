@@ -14,9 +14,9 @@
         <fragment
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:name="fragments.HomeTimelineFragment"
+            android:name="fragments.MentionsFragment"
             android:id="@+id/fragmentTweets"
             android:layout_gravity="left|top"
-            tools:layout="@layout/frament_tweets_list" />
+            tools:layout="@layout/fragment_tweets_list" />
     </FrameLayout>
 </RelativeLayout>
