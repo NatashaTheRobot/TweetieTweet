@@ -3,17 +3,17 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.natashatherobot.tweetietweet.TimelineActivity"
+    tools:context="com.natashatherobot.tweetietweet.ProfileActivity"
     tools:ignore="MergeRootFrame" >
 
-    <FrameLayout
-        android:id="@+id/frameContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true">
 
-    </FrameLayout>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="fragments.UserTimelineFragment"
+        android:id="@+id/fragmentUserTimeline"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        tools:layout="@layout/fragment_tweets_list" />
+
 </RelativeLayout>

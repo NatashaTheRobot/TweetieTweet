@@ -17,6 +17,7 @@
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="1" />
+
         <activity
             android:name="com.natashatherobot.tweetietweet.LoginActivity"
             android:label="@string/app_name" >
@@ -37,8 +38,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.natashatherobot.tweetietweet.TimelineActivity"
+            android:name="com.natashatherobot.tweetietweet.TweetsActivity"
             android:label="@string/title_activity_timeline" >
+        </activity>
+        <activity
+            android:name="com.natashatherobot.tweetietweet.ProfileActivity"
+            android:label="" >
         </activity>
     </application>
 

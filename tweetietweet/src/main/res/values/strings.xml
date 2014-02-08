@@ -9,5 +9,7 @@
     <string name="welcome_detail">Welcome to TweetieTweet!</string>
     <string name="tweet_image_description">user image</string>
     <string name="title_activity_timeline">TweetieTweet</string>
+    <string name="action_profile">Profile</string>
+    <string name="title_activity_profile">Profile</string>
 
 </resources>

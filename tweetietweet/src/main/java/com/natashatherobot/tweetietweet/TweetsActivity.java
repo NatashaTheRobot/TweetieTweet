@@ -1,32 +1,18 @@
 package com.natashatherobot.tweetietweet;
 
-import android.annotation.TargetApi;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-
-import java.util.ArrayList;
 
 import fragments.HomeTimelineFragment;
 import fragments.MentionsFragment;
-import fragments.TweetsListFragment;
-import helpers.TweetieBirdApp;
-import models.Tweet;
 
-public class TimelineActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class TweetsActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     private HomeTimelineFragment homeTimelineFragment;
     private MentionsFragment mentionsFragment;
@@ -34,7 +20,7 @@ public class TimelineActivity extends ActionBarActivity implements ActionBar.Tab
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        setContentView(R.layout.activity_tweets);
 
         setupNavigationTabs();
     }
@@ -44,7 +30,7 @@ public class TimelineActivity extends ActionBarActivity implements ActionBar.Tab
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.timeline, menu);
+        getMenuInflater().inflate(R.menu.tweets, menu);
         return true;
     }
 
@@ -54,10 +40,16 @@ public class TimelineActivity extends ActionBarActivity implements ActionBar.Tab
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_profile) {
+            displayProfile();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void displayProfile() {
+        Intent intent = new Intent(TweetsActivity.this, ProfileActivity.class);
+        startActivity(intent);
     }
 
     private void setupNavigationTabs() {

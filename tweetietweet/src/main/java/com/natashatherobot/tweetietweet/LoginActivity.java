@@ -3,7 +3,6 @@ package com.natashatherobot.tweetietweet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.os.Build;
 
 import com.codepath.oauth.OAuthLoginActivity;
 
@@ -23,7 +22,7 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
     // i.e Display application "homepage"
     @Override
     public void onLoginSuccess() {
-        Intent i = new Intent(this, TimelineActivity.class);
+        Intent i = new Intent(this, TweetsActivity.class);
         startActivity(i);
     }
 
