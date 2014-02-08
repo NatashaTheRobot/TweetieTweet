@@ -53,7 +53,8 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
                 DateUtils.SECOND_IN_MILLIS,
                 DateUtils.WEEK_IN_MILLIS,
                 0).toString();
-        String formattedTime = "<small><font color='#777777'>" + timeString + "</font></small>";
+        String timeStringModified = timeString.split(",")[0];
+        String formattedTime = "<small><font color='#777777'>" + timeStringModified + "</font></small>";
         tvTimeStamp.setText(Html.fromHtml(formattedTime));
 
         TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
