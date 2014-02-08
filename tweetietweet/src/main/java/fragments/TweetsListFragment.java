@@ -23,8 +23,9 @@ import models.Tweet;
  * Created by Natasha Murashev on 2/8/14.
  */
 public class TweetsListFragment extends Fragment {
-    ArrayList<Tweet> tweets;
-    TweetsAdapter tweetsAdapter;
+    private ArrayList<Tweet> tweets;
+    private TweetsAdapter tweetsAdapter;
+    private ListView lvTweets;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class TweetsListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         tweets = new ArrayList<Tweet>();
-        ListView lvTweets = (ListView) getActivity().findViewById(R.id.lvTweets);
+        lvTweets = (ListView) getActivity().findViewById(R.id.lvTweets);
         tweetsAdapter = new TweetsAdapter(getActivity(), tweets);
         lvTweets.setAdapter(tweetsAdapter);
     }
@@ -46,38 +47,7 @@ public class TweetsListFragment extends Fragment {
         return tweetsAdapter;
     }
 
-    public void customLoadMoreDataFromApi(int totalItemsCount) {
-        Tweet lastTweet = tweets.get(totalItemsCount - 1);
-        String sinceId = String.valueOf(lastTweet.getUId());
-        TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(JSONArray jsonTweets) {
-                ArrayList<Tweet> newTweets = Tweet.fromJson(jsonTweets);
-                tweets.addAll(newTweets);
-                tweetsAdapter.notifyDataSetChanged();
-            }
-        }, sinceId);
+    public ListView getLvTweets() {
+        return lvTweets;
     }
-
-//    private void configureTweets() {
-//        TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(JSONArray jsonTweets) {
-//                tweets = Tweet.fromJson(jsonTweets);
-//                ListView lvTweets = (ListView) getActivity().findViewById(R.id.lvTweets);
-//                tweetsAdapter = new TweetsAdapter(getActivity(), tweets);
-//                lvTweets.setAdapter(tweetsAdapter);
-//
-//                lvTweets.setOnScrollListener(new EndlessScrollListener(){
-//
-//                    @Override
-//                    public void onLoadMore(int page, int totalItemsCount) {
-//                        customLoadMoreDataFromApi(totalItemsCount);
-//                    }
-//
-//                });
-//
-//            }
-//        }, null);
-//    }
 }
