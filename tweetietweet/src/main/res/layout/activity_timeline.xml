@@ -7,16 +7,13 @@
     tools:ignore="MergeRootFrame" >
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="left|top">
+        android:id="@+id/frameContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true">
 
-        <fragment
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:name="fragments.MentionsFragment"
-            android:id="@+id/fragmentTweets"
-            android:layout_gravity="left|top"
-            tools:layout="@layout/fragment_tweets_list" />
     </FrameLayout>
 </RelativeLayout>
