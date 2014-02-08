@@ -3,6 +3,11 @@
 
     <string name="app_name">TweetieTweet</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string><string name="login_label">Log In with Twitter</string><string name="welcome">Hello.</string><string name="welcome_detail">Welcome to TweetieTweet!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_label">Log In with Twitter</string>
+    <string name="welcome">Hello.</string>
+    <string name="welcome_detail">Welcome to TweetieTweet!</string>
+    <string name="tweet_image_description">user image</string>
+    <string name="title_activity_timeline">TweetieTweet</string>
 
 </resources>
