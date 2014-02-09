@@ -8,9 +8,17 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONObject;
 
 import fragments.HomeTimelineFragment;
 import fragments.MentionsFragment;
+import helpers.TweetieBirdApp;
+import models.Tweet;
+import models.User;
 
 public class TweetsActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -48,8 +56,27 @@ public class TweetsActivity extends ActionBarActivity implements ActionBar.TabLi
     }
 
     private void displayProfile() {
-        Intent intent = new Intent(TweetsActivity.this, ProfileActivity.class);
-        startActivity(intent);
+        final Intent intent = new Intent(TweetsActivity.this, ProfileActivity.class);
+        User currentUser = TweetieBirdApp.getUser();
+        
+        if (currentUser == null) {
+            TweetieBirdApp.getRestClient().getMyInfo(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(JSONObject jsonUser) {
+                    try {
+                        User user = User.fromJson(jsonUser);
+                        TweetieBirdApp.setUser(user);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            intent.putExtra("user", currentUser);
+            startActivity(intent);
+        }
     }
 
     private void setupNavigationTabs() {
