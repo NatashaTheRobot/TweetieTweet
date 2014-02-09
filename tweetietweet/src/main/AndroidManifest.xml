@@ -45,6 +45,10 @@
             android:name="com.natashatherobot.tweetietweet.ProfileActivity"
             android:label="" >
         </activity>
+        <activity
+            android:name="com.natashatherobot.tweetietweet.ComposeActivity"
+            android:label="@string/title_activity_compose" >
+        </activity>
     </application>
 
 </manifest>

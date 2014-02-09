@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -125,5 +126,11 @@ public class TweetsActivity extends ActionBarActivity implements ActionBar.TabLi
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
+    }
+
+    public void diplayComposeView(View view) {
+        Intent intent = new Intent(TweetsActivity.this, ComposeActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_fade_out);
     }
 }
