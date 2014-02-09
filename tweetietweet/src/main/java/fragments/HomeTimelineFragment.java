@@ -1,17 +1,12 @@
 package fragments;
 
 import android.os.Bundle;
-import android.util.Log;
-
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 
-import java.util.ArrayList;
-
 import helpers.EndlessScrollListener;
 import helpers.TweetieBirdApp;
-import models.Tweet;
 
 /**
  * Created by Natasha Murashev on 2/8/14.
@@ -24,8 +19,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
         TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONArray jsonTweets) {
-                ArrayList<Tweet> tweets = Tweet.fromJson(jsonTweets);
-                getTweetsAdapter().addAll(tweets);
+                addTweetsFromJsonArray(jsonTweets);
 
                 getLvTweets().setOnScrollListener(new EndlessScrollListener() {
 
@@ -39,13 +33,11 @@ public class HomeTimelineFragment extends TweetsListFragment {
     }
 
     private void customLoadMoreDataFromApi(int totalItemsCount) {
-        Tweet lastTweet = getTweetsAdapter().getItem(totalItemsCount - 1);
         TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONArray jsonTweets) {
-                ArrayList<Tweet> newTweets = Tweet.fromJson(jsonTweets);
-                getTweetsAdapter().addAll(newTweets);
+                addTweetsFromJsonArray(jsonTweets);
             }
-        }, lastTweet.getUId());
+        }, getTweetUid(totalItemsCount - 1));
     }
 }

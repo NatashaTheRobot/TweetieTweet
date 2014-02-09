@@ -27,7 +27,7 @@ public class Tweet extends Model implements Serializable {
     @Column(name="body")
     private String body;
 
-    @Column(name="uid", unique=true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    @Column(name="uid", unique=true, onUniqueConflict = Column.ConflictAction.IGNORE)
     private String uid;
 
     @Column(name="favorited")

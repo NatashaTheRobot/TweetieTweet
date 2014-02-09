@@ -9,6 +9,8 @@ import android.widget.ListView;
 
 import com.natashatherobot.tweetietweet.R;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 import adapters.TweetsAdapter;
@@ -38,11 +40,22 @@ public class TweetsListFragment extends Fragment {
         lvTweets.setAdapter(tweetsAdapter);
     }
 
-    public TweetsAdapter getTweetsAdapter() {
-        return tweetsAdapter;
-    }
-
     public ListView getLvTweets() {
         return lvTweets;
     }
+
+    public void addTweetsFromJsonArray(JSONArray jsonTweets) {
+        ArrayList<Tweet> newTweets = Tweet.fromJson(jsonTweets);
+        tweetsAdapter.addAll(newTweets);
+    }
+
+    public void addTweet(Tweet tweet, int position) {
+       tweetsAdapter.insert(tweet, position);
+    }
+
+    public String getTweetUid(int position) {
+        Tweet tweet = tweetsAdapter.getItem(position);
+        return tweet.getUId();
+    }
+
 }

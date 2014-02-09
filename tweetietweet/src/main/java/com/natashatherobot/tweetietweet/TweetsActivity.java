@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -135,7 +134,7 @@ public class TweetsActivity extends ActionBarActivity implements ActionBar.TabLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             Tweet tweet = (Tweet) data.getSerializableExtra("tweet");
-            homeTimelineFragment.getTweetsAdapter().insert(tweet, 0);
+            homeTimelineFragment.addTweet(tweet, 0);
         }
     }
 
