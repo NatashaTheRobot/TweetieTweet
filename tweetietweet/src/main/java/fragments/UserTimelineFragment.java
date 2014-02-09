@@ -11,15 +11,25 @@ import java.util.ArrayList;
 import helpers.EndlessScrollListener;
 import helpers.TweetieBirdApp;
 import models.Tweet;
+import models.User;
 
 /**
  * Created by Natasha Murashev on 2/8/14.
  */
 public class UserTimelineFragment extends TweetsListFragment {
+    private User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        getUserTimelineData();
+    }
+
+    private void getUserTimelineData() {
         TweetieBirdApp.getRestClient().getUserTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray jsonTweets) {
@@ -34,7 +44,7 @@ public class UserTimelineFragment extends TweetsListFragment {
                     }
                 });
             }
-        }, null);
+        }, null, user.getUId());
     }
 
     private void customLoadMoreDataFromApi(int totalItemsCount) {
@@ -45,7 +55,7 @@ public class UserTimelineFragment extends TweetsListFragment {
                 ArrayList<Tweet> newTweets = Tweet.fromJson(jsonTweets);
                 getTweetsAdapter().addAll(newTweets);
             }
-        }, lastTweet.getUId());
+        }, lastTweet.getUId(), user.getUId());
     }
 
 }

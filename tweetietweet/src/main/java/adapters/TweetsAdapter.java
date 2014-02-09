@@ -7,6 +7,7 @@ package adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -16,11 +17,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.natashatherobot.tweetietweet.ProfileActivity;
 import com.natashatherobot.tweetietweet.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import models.Tweet;
+import models.User;
 
 public class TweetsAdapter extends ArrayAdapter<Tweet> {
 
@@ -37,14 +40,23 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
         }
 
         Tweet tweet = getItem(position);
+        final User user = tweet.getUser();
 
         ImageView imageView = (ImageView) view.findViewById(R.id.ivProfile);
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
-        imageLoader.displayImage(tweet.getUser().getProfileImageUrl(), imageView);
+        imageLoader.displayImage(user.getProfileImageUrl(), imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                intent.putExtra("user", user);
+                getContext().startActivity(intent);
+            }
+        });
 
         TextView nameView = (TextView) view.findViewById(R.id.tvName);
-        String formattedName = "<b>" + tweet.getUser().getName() + " <b>" + "<small><font color='#777777'>@" + tweet.getUser().getScreenName() + "</font></small>";
+        String formattedName = "<b>" + user.getName() + " <b>" + "<small><font color='#777777'>@" + user.getScreenName() + "</font></small>";
         nameView.setText(Html.fromHtml(formattedName));
 
         TextView tvTimeStamp = (TextView) view.findViewById(R.id.tvTimeStamp);
