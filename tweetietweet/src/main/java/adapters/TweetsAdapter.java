@@ -6,8 +6,10 @@ package adapters;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -49,9 +51,12 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ProfileActivity.class);
-                intent.putExtra("user", user);
-                getContext().startActivity(intent);
+                Activity activity = (Activity) getContext();
+                if (activity.getClass() != ProfileActivity.class) {
+                    Intent intent = new Intent(activity, ProfileActivity.class);
+                    intent.putExtra("user", user);
+                    getContext().startActivity(intent);
+                }
             }
         });
 
