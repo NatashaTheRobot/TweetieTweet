@@ -13,5 +13,6 @@
     <string name="title_activity_profile">Profile</string>
     <string name="compose_hint">What\'s happening?</string>
     <string name="title_activity_compose">Compose</string>
+    <string name="action_tweet">TWEET</string>
 
 </resources>

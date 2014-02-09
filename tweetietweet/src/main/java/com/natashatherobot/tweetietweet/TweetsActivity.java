@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,8 @@ import models.Tweet;
 import models.User;
 
 public class TweetsActivity extends ActionBarActivity implements ActionBar.TabListener {
+
+    private final int REQUEST_CODE = 20;
 
     private HomeTimelineFragment homeTimelineFragment;
     private MentionsFragment mentionsFragment;
@@ -128,9 +131,40 @@ public class TweetsActivity extends ActionBarActivity implements ActionBar.TabLi
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            Tweet tweet = (Tweet) data.getSerializableExtra("tweet");
+            homeTimelineFragment.getTweetsAdapter().insert(tweet, 0);
+        }
+    }
+
     public void diplayComposeView(View view) {
         Intent intent = new Intent(TweetsActivity.this, ComposeActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_fade_out);
+
+        final Intent i = new Intent(TweetsActivity.this, ComposeActivity.class);
+        if(TweetieBirdApp.getUser() != null) {
+            startActivityForResult(i, REQUEST_CODE);
+            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_fade_out);
+        } else {
+            TweetieBirdApp.getRestClient().getMyInfo(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(JSONObject jsonUser) {
+                    try {
+                        TweetieBirdApp.setUser(User.fromJson(jsonUser));
+                        startActivityForResult(i, REQUEST_CODE);
+                        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_fade_out);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable arg0, String message) {
+                    Log.d("DEBUG", "Failed to fetch user settings:"
+                            + message);
+                }
+            });
+        }
     }
 }
