@@ -28,6 +28,7 @@ import models.Tweet;
 import models.User;
 
 public class TweetsAdapter extends ArrayAdapter<Tweet> {
+    private View view;
 
     public TweetsAdapter(Context context, List<Tweet> tweets) {
         super(context, 0, tweets);
@@ -35,15 +36,24 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
+        view = convertView;
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(com.natashatherobot.tweetietweet.R.layout.tweet_item, null);
         }
 
         Tweet tweet = getItem(position);
-        final User user = tweet.getUser();
+        configureTweetTimestamp(tweet);
+        configureTweetText(tweet);
 
+        User user = tweet.getUser();
+        configureUserImage(user);
+        configureUserName(user);
+
+        return view;
+    }
+
+    private void configureUserImage(final User user) {
         ImageView imageView = (ImageView) view.findViewById(R.id.ivProfile);
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
@@ -59,11 +69,15 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
                 }
             }
         });
+    }
 
+    private void configureUserName(User user) {
         TextView nameView = (TextView) view.findViewById(R.id.tvName);
         String formattedName = "<b>" + user.getName() + " <b>" + "<small><font color='#777777'>@" + user.getScreenName() + "</font></small>";
         nameView.setText(Html.fromHtml(formattedName));
+    }
 
+    private void configureTweetTimestamp(Tweet tweet) {
         TextView tvTimeStamp = (TextView) view.findViewById(R.id.tvTimeStamp);
         String timeString = DateUtils.getRelativeDateTimeString(getContext(),
                 tweet.getCreatedAt().getTime(),
@@ -73,10 +87,10 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
         String timeStringModified = timeString.split(",")[0];
         String formattedTime = "<small><font color='#777777'>" + timeStringModified + "</font></small>";
         tvTimeStamp.setText(Html.fromHtml(formattedTime));
+    }
 
+    private void configureTweetText(Tweet tweet) {
         TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
         bodyView.setText(Html.fromHtml(tweet.getBody()));
-
-        return view;
     }
 }
