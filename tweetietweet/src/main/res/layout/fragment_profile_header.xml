@@ -2,8 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/activity_vertical_margin">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,7 +39,7 @@
             android:textColor="@color/white"
             android:layout_toRightOf="@+id/ivProfileImage"
             android:text="Name"
-            android:textSize="16sp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,34 +49,45 @@
             android:layout_alignLeft="@id/tvName"
             android:layout_below="@id/tvName"
             android:text="Tagline"
-            android:textSize="12sp"/>
+            android:textSize="14sp"/>
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llCounts"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rlHeader"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="12sp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        style="?android:listSeparatorTextViewStyle">
+
+        <TextView
+            android:id="@+id/tvNumTweets"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:gravity="left"
+            android:text="5 Tweets"/>
 
         <TextView
             android:id="@+id/tvFollowers"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center"
             android:text="5 Followers"/>
 
         <TextView
             android:id="@+id/tvFollowing"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:gravity="right"
             android:text="5 Following"/>
 
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </RelativeLayout>

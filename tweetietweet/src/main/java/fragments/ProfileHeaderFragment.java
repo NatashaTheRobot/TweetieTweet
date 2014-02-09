@@ -44,10 +44,13 @@ public class ProfileHeaderFragment extends Fragment {
         tvTagline.setText(user.getTagline());
 
         TextView tvFollowers = (TextView) view.findViewById(R.id.tvFollowers);
-        tvFollowers.setText(user.getFollowersCount() + " followers");
+        tvFollowers.setText(user.getFollowersCount() + " Followers");
 
         TextView tvFollowing = (TextView) view.findViewById(R.id.tvFollowing);
-        tvFollowing.setText(user.getFriendsCount() + " following");
+        tvFollowing.setText(user.getFriendsCount() + " Following");
+
+        TextView tvNumTweets = (TextView) view.findViewById(R.id.tvNumTweets);
+        tvNumTweets.setText(user.getNumTweets() + " Tweets");
 
         ImageView ivProfileImage = (ImageView) view.findViewById(R.id.ivProfileImage);
         ImageLoader.getInstance().displayImage(user.getProfileImageUrl(), ivProfileImage);
