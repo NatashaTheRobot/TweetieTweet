@@ -3,9 +3,68 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
     tools:context="com.natashatherobot.tweetietweet.ProfileActivity"
     tools:ignore="MergeRootFrame" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/ivProfileImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@android:drawable/screen_background_light_transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvName"
+            android:layout_toRightOf="@+id/ivProfileImage"
+            android:text="Name"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTagline"
+            android:layout_alignLeft="@id/tvName"
+            android:layout_below="@id/tvName"
+            android:text="Tagline"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llCounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlHeader"
+        android:layout_marginBottom="12sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Followers"/>
+
+        <TextView
+            android:id="@+id/tvFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="5 Following"/>
+
+    </LinearLayout>
 
     <fragment
         android:layout_width="match_parent"
@@ -13,7 +72,7 @@
         android:name="fragments.UserTimelineFragment"
         android:id="@+id/fragmentUserTimeline"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/llCounts"
         tools:layout="@layout/fragment_tweets_list" />
 
 </RelativeLayout>

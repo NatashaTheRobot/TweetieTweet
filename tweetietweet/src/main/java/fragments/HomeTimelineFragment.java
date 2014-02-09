@@ -40,13 +40,12 @@ public class HomeTimelineFragment extends TweetsListFragment {
 
     private void customLoadMoreDataFromApi(int totalItemsCount) {
         Tweet lastTweet = getTweetsAdapter().getItem(totalItemsCount - 1);
-        String sinceId = String.valueOf(lastTweet.getUId());
         TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONArray jsonTweets) {
                 ArrayList<Tweet> newTweets = Tweet.fromJson(jsonTweets);
                 getTweetsAdapter().addAll(newTweets);
             }
-        }, sinceId);
+        }, lastTweet.getUId());
     }
 }

@@ -1,20 +1,13 @@
 package com.natashatherobot.tweetietweet;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
 
@@ -60,6 +53,22 @@ public class ProfileActivity extends ActionBarActivity {
 
     private void loadUserInfo(User user) {
         getActionBar().setTitle("@" + user.getScreenName());
+
+        TextView tvName = (TextView) findViewById(R.id.tvName);
+        tvName.setText(user.getName());
+
+        TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
+        tvTagline.setText(user.getTagline());
+
+        TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
+        tvFollowers.setText(user.getFollowersCount() + " followers");
+
+        TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
+        tvFollowing.setText(user.getFriendsCount() + " following");
+
+        ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+        ImageLoader.getInstance().displayImage(user.getProfileImageUrl(), ivProfileImage);
+
     }
 
 
