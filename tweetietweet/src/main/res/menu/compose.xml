@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/miTweet"
-        android:showAsAction="always"
-        android:orderInCategory="1"
+        android:showAsAction="withText"
         android:title="@string/action_tweet"/>
+
 </menu>

@@ -51,5 +51,8 @@ public class ProfileHeaderFragment extends Fragment {
 
         ImageView ivProfileImage = (ImageView) view.findViewById(R.id.ivProfileImage);
         ImageLoader.getInstance().displayImage(user.getProfileImageUrl(), ivProfileImage);
+
+        ImageView ivProfileBackgroundImage = (ImageView) view.findViewById(R.id.ivProfileBackgroundImage);
+        ImageLoader.getInstance().displayImage(user.getProfileBackgroundImageUrl(), ivProfileBackgroundImage);
     }
 }

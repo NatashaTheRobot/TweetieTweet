@@ -3,8 +3,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
     tools:context="com.natashatherobot.tweetietweet.ProfileActivity"
     android:orientation="vertical"
     tools:ignore="MergeRootFrame" >
@@ -20,6 +18,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:name="fragments.UserTimelineFragment"
         android:id="@+id/fragmentUserTimeline"
         tools:layout="@layout/fragment_tweets_list" />

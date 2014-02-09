@@ -70,7 +70,7 @@ public class Tweet extends Model implements Serializable {
         Tweet tweet = new Tweet();
         try {
             tweet.body = jsonObject.getString("text");
-            tweet.uid = String.valueOf(jsonObject.getLong("id"));
+            tweet.uid = jsonObject.getString("id_str");
             tweet.favorited = jsonObject.getBoolean("favorited");
             tweet.retweeted = jsonObject.getBoolean("retweeted");
             tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
