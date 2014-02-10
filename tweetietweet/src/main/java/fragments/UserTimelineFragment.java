@@ -33,7 +33,7 @@ public class UserTimelineFragment extends TweetsListFragment {
         TweetieBirdApp.getRestClient().getUserTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray jsonTweets) {
-                addTweetsFromJsonArray(jsonTweets);
+                addTweetsFromJsonArray(jsonTweets, -1);
 
                 getLvTweets().setOnScrollListener(new EndlessScrollListener() {
 
@@ -43,16 +43,16 @@ public class UserTimelineFragment extends TweetsListFragment {
                     }
                 });
             }
-        }, null, user.getUId());
+        }, null, user.getUId(), null);
     }
 
     private void customLoadMoreDataFromApi(int totalItemsCount) {
         TweetieBirdApp.getRestClient().getUserTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray jsonTweets) {
-                addTweetsFromJsonArray(jsonTweets);
+                addTweetsFromJsonArray(jsonTweets, 0);
             }
-        }, getTweetUid(totalItemsCount - 1), user.getUId());
+        }, null, user.getUId(), getTweetUid(totalItemsCount - 1));
     }
 
 }

@@ -44,8 +44,11 @@ public class TweetsListFragment extends Fragment {
         return lvTweets;
     }
 
-    public void addTweetsFromJsonArray(JSONArray jsonTweets) {
+    public void addTweetsFromJsonArray(JSONArray jsonTweets, int positonOfItemToRemove) {
         ArrayList<Tweet> newTweets = Tweet.fromJson(jsonTweets);
+        if (positonOfItemToRemove != -1) {
+            newTweets.remove(positonOfItemToRemove);
+        }
         tweetsAdapter.addAll(newTweets);
     }
 

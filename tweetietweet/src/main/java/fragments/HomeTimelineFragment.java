@@ -19,7 +19,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
         TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONArray jsonTweets) {
-                addTweetsFromJsonArray(jsonTweets);
+                addTweetsFromJsonArray(jsonTweets, -1);
 
                 getLvTweets().setOnScrollListener(new EndlessScrollListener() {
 
@@ -29,15 +29,15 @@ public class HomeTimelineFragment extends TweetsListFragment {
                     }
                 });
             }
-        }, null);
+        }, null, null);
     }
 
     private void customLoadMoreDataFromApi(int totalItemsCount) {
         TweetieBirdApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONArray jsonTweets) {
-                addTweetsFromJsonArray(jsonTweets);
+                addTweetsFromJsonArray(jsonTweets, 0);
             }
-        }, getTweetUid(totalItemsCount - 1));
+        }, null, getTweetUid(totalItemsCount - 1));
     }
 }

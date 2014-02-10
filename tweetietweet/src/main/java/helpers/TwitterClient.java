@@ -23,7 +23,7 @@ public class TwitterClient extends OAuthBaseClient {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-    public void getHomeTimeline(AsyncHttpResponseHandler handler, String sinceId) {
+    public void getHomeTimeline(AsyncHttpResponseHandler handler, String sinceId, String maxId) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = null;
 
@@ -32,10 +32,17 @@ public class TwitterClient extends OAuthBaseClient {
             params.put("since_id", sinceId);
         }
 
+        if (maxId != null) {
+            if (params == null) {
+                params = new RequestParams();
+            }
+            params.put("max_id", maxId);
+        }
+
         client.get(apiUrl, params, handler);
     }
 
-    public void getMentions(AsyncHttpResponseHandler handler, String sinceId) {
+    public void getMentions(AsyncHttpResponseHandler handler, String sinceId, String maxId) {
         String apiUrl = getApiUrl("statuses/mentions_timeline.json");
         RequestParams params = null;
 
@@ -44,10 +51,17 @@ public class TwitterClient extends OAuthBaseClient {
             params.put("since_id", sinceId);
         }
 
+        if (maxId != null) {
+            if (params == null) {
+                params = new RequestParams();
+            }
+            params.put("max_id", maxId);
+        }
+
         client.get(apiUrl, params, handler);
     }
 
-    public void getUserTimeline(AsyncHttpResponseHandler handler, String sinceId, String userId) {
+    public void getUserTimeline(AsyncHttpResponseHandler handler, String sinceId, String userId, String maxId) {
         String apiUrl = getApiUrl("statuses/user_timeline.json");
         RequestParams params = null;
 
@@ -61,6 +75,13 @@ public class TwitterClient extends OAuthBaseClient {
                 params = new RequestParams();
             }
             params.put("user_id", userId);
+        }
+
+        if (maxId != null) {
+            if (params == null) {
+                params = new RequestParams();
+            }
+            params.put("max_id", maxId);
         }
 
         client.get(apiUrl, params, handler);
