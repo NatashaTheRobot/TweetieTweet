@@ -8,6 +8,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+import helpers.Constants;
 import helpers.EndlessScrollListener;
 import helpers.TweetieBirdApp;
 import models.Tweet;
@@ -53,6 +54,11 @@ public class UserTimelineFragment extends TweetsListFragment {
                 addTweetsFromJsonArray(jsonTweets, 0);
             }
         }, null, user.getUId(), getTweetUid(totalItemsCount - 1));
+    }
+
+    @Override
+    public void setFragmentType() {
+        fragmentType = Constants.FragmentType.USER;
     }
 
 }
